@@ -32,7 +32,7 @@ const PokemonName = ({ number, name, types }: PokemonNameProps) => {
         <Typography variant="subtitle2" color={'gray'}>
           No: {number}
         </Typography>
-        <Typography variant="h6">{name}</Typography>
+        <Typography variant="h4">{name}</Typography>
       </NameColumn>
       <TypesColumn>
         {types?.map((type, index) => {
