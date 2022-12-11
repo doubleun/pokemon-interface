@@ -17,7 +17,11 @@ const PokemonList = () => {
     <PokemonListContainer>
       {context.pokemonList?.map((pokemon, index) => {
         return (
-          <PokemonCard key={`${index}-${pokemon.name}`} pokemon={pokemon} />
+          <PokemonCard
+            key={`${index}-${pokemon.name}`}
+            data-test-id={`${index}-${pokemon.name}`}
+            pokemon={pokemon}
+          />
         )
       })}
     </PokemonListContainer>

@@ -10,7 +10,8 @@ interface SearchInputProps {
 const SearchInput = ({ onKeyDown, value, onValueChange }: SearchInputProps) => {
   return (
     <TextField
-      id="standard-basic"
+      id="search-pokemon-input"
+      data-testid="search-pokemon-input"
       placeholder="Search"
       variant="standard"
       onKeyDown={onKeyDown}
