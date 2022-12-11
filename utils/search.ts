@@ -130,9 +130,7 @@ const handleSearchPokemon = async (
       method: 'POST',
       data: requestBody,
     })
-    console.log('RESPONSE FROM AXIOS REQUEST: ', response?.data)
     const result = response?.data?.data
-    console.log('resss', result)
     if (Array.isArray(result?.pokemons)) {
       // return case: multiple pokemon
       return result.pokemons

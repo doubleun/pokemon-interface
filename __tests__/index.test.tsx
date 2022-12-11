@@ -1,18 +1,21 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import Home from '../pages/index'
-import SearchInput from '../components/base/SearchInput'
+import { handleSearchPokemon } from '../utils/search'
 
-describe('Input value', () => {
-  it('updates on change', () => {
-    const setSearch = jest.fn((value) => {})
+describe('Render app', () => {
+  it('Get Bulbasaur', async () => {
+    const response = await handleSearchPokemon('Bulbasaur')
+    expect(response?.length).toEqual(1)
+    expect(response?.[0].types.includes('Grass')).toBeTruthy()
+  })
 
-    const { queryByPlaceholderText } = render(<SearchInput value="Bulbasaur" />)
+  it('Get Charmander', async () => {
+    const response = await handleSearchPokemon('Charmander')
+    expect(response?.length).toEqual(1)
+    expect(response?.[0].types.includes('Fire')).toBeTruthy()
+  })
 
-    const searchInput = queryByPlaceholderText('Search')
-
-    fireEvent.keyDown(searchInput as HTMLElement, { key: 'Enter', code: 13 })
-
-    // expect(searchInput.value).toBe('test') // OR
-    // expect(setSearch).toHaveBeenCalledWith('test')
+  it('Get Squirtle', async () => {
+    const response = await handleSearchPokemon('Squirtle')
+    expect(response?.length).toEqual(1)
+    expect(response?.[0].types.includes('Water')).toBeTruthy()
   })
 })

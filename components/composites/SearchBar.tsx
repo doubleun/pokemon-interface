@@ -12,7 +12,7 @@ const SearchBarContainer = styled(Box)`
   gap: 1rem;
 `
 
-const handleOnSearchEnter = async (
+export const handleOnSearchEnter = async (
   e: React.KeyboardEvent<HTMLInputElement>,
   value: string,
   setPokemonList: Dispatch<SetStateAction<PokemonInterface[]>>
