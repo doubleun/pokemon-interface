@@ -12,7 +12,7 @@ const SearchInput = ({ onKeyDown, value, onValueChange }: SearchInputProps) => {
     <TextField
       id="search-pokemon-input"
       data-testid="search-pokemon-input"
-      placeholder="Search"
+      placeholder="You can search by pressing Enter key"
       variant="standard"
       onKeyDown={onKeyDown}
       onChange={onValueChange}
