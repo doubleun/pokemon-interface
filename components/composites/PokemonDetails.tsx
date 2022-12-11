@@ -104,7 +104,6 @@ const PokemonDetails = ({ pokemon }: { pokemon: PokemonInterface }) => {
             display: 'flex',
             flexDirection: 'row',
             gap: '1rem',
-            // justifyContent: 'space-between',
           }}
         >
           <Typography variant="body2">MAX HP: {pokemon.maxHP}</Typography>

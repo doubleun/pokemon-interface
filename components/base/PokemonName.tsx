@@ -7,7 +7,6 @@ import { PokemonInterface } from '../../types'
 const PokemonNameContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
-  /* padding-block: 1rem; */
   /* border: 2px solid black; */
 `
 
@@ -26,7 +25,6 @@ const TypesColumn = styled(Box)`
 type PokemonNameProps = Pick<PokemonInterface, 'number' | 'name' | 'types'>
 
 const PokemonName = ({ number, name, types }: PokemonNameProps) => {
-  // const types = ['aasd']
   return (
     <PokemonNameContainer>
       <NameColumn>

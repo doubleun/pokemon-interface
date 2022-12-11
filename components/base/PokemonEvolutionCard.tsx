@@ -22,10 +22,14 @@ const PokemonImageContainer = styled(Box)`
 
 const handleSearchEvolution = async (
   name: string,
-  setPokemonList: Dispatch<SetStateAction<PokemonInterface[]>>
+  setPokemonList: Dispatch<SetStateAction<PokemonInterface[]>>,
+  setSearchValue: Dispatch<SetStateAction<string>>
 ) => {
   const pokemonList = await handleSearchPokemon(name)
-  if (Array.isArray(pokemonList)) setPokemonList(pokemonList)
+  if (Array.isArray(pokemonList)) {
+    setPokemonList(pokemonList)
+    setSearchValue(name)
+  }
 }
 
 const PokemonEvolutionCard = ({
@@ -38,7 +42,11 @@ const PokemonEvolutionCard = ({
   return (
     <PokemonEvolutionCardContainer
       onClick={() =>
-        handleSearchEvolution(evolution.name, context.setPokemonList)
+        handleSearchEvolution(
+          evolution.name,
+          context.setPokemonList,
+          context.setSearchValue
+        )
       }
     >
       <PokemonImageContainer>
