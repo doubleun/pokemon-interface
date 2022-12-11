@@ -16,7 +16,6 @@ const PokemonCardContainer = styled(Box)`
 `
 
 const PokemonCard = ({ pokemon }: { pokemon: PokemonInterface }) => {
-  console.log('pokemon card', pokemon)
   return (
     <PokemonCardContainer>
       <PokemonName
