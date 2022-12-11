@@ -3,6 +3,7 @@ import { Container } from '@mui/material'
 import styled from '@emotion/styled'
 import SearchBar from './composites/SearchBar'
 import PokemonList from './composites/PokemonList'
+import Loading from './base/Loading'
 
 const AppContainer = styled(Container)`
   display: flex;
@@ -16,6 +17,7 @@ const App = () => {
     <AppContainer>
       <SearchBar />
       <PokemonList />
+      <Loading />
     </AppContainer>
   )
 }

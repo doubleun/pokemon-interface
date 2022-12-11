@@ -15,13 +15,32 @@ const SearchBarContainer = styled(Box)`
 export const handleOnSearchEnter = async (
   e: React.KeyboardEvent<HTMLInputElement>,
   value: string,
-  setPokemonList: Dispatch<SetStateAction<PokemonInterface[]>>
+  setPokemonList: Dispatch<SetStateAction<PokemonInterface[]>>,
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   const key = e.key
   if (key?.toLowerCase() === 'enter') {
+    setPokemonList([])
+    setIsLoading(true)
+
     const pokemonList = await handleSearchPokemon(value)
     if (Array.isArray(pokemonList)) setPokemonList(pokemonList)
+    setIsLoading(false)
   }
+}
+
+const handleSearchButtonPressed = async (
+  value: string,
+  setPokemonList: Dispatch<SetStateAction<PokemonInterface[]>>,
+  setIsLoading: Dispatch<SetStateAction<boolean>>
+) => {
+  setPokemonList([])
+  setIsLoading(true)
+
+  const pokemonList = await handleSearchPokemon(value)
+  if (Array.isArray(pokemonList)) setPokemonList(pokemonList)
+
+  setIsLoading(false)
 }
 
 const SearchBar = () => {
@@ -32,15 +51,29 @@ const SearchBar = () => {
       <SearchInput
         value={context.searchValue}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-          handleOnSearchEnter(e, context.searchValue, context.setPokemonList)
+          handleOnSearchEnter(
+            e,
+            context.searchValue,
+            context.setPokemonList,
+            context.setIsLoading
+          )
         }
         onValueChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           context.setSearchValue(e.target.value)
         }
       />
-      {/* <Button variant="outlined" onClick={() => handleSearchPokemon(value)}>
+      <Button
+        variant="outlined"
+        onClick={() =>
+          handleSearchButtonPressed(
+            context.searchValue,
+            context.setPokemonList,
+            context.setIsLoading
+          )
+        }
+      >
         Search
-      </Button> */}
+      </Button>
     </SearchBarContainer>
   )
 }

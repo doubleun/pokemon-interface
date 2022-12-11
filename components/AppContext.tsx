@@ -6,11 +6,15 @@ const AppContext = createContext<{
   setSearchValue: Dispatch<SetStateAction<string>>
   pokemonList: PokemonInterface[]
   setPokemonList: Dispatch<SetStateAction<PokemonInterface[]>>
+  isLoading: boolean
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 }>({
   searchValue: '',
   setSearchValue: () => {},
   pokemonList: [],
   setPokemonList: () => [],
+  isLoading: false,
+  setIsLoading: () => false,
 })
 
 export default AppContext

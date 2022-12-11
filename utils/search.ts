@@ -5,26 +5,7 @@ import fetchPokemon from './axios'
 const maxPokemonNumber = '151'
 
 const getRequestBody = (searchValue: string) => {
-  if (typeof searchValue === 'string' && searchValue !== '') {
-    return {
-      query: `query pokemon($id: String, $name: String){
-        pokemon(id: $id, name: $name){
-          id
-          number
-          name
-          attacks{
-            fast{
-              name
-              type
-              damage
-            }
-            special{
-              name
-              type
-              damage
-            }
-          }
-          evolutions{
+  const query = `
             id
             number
             name
@@ -40,6 +21,31 @@ const getRequestBody = (searchValue: string) => {
                 damage
               }
             }
+            evolutions{
+              id
+              number
+              name
+              attacks{
+                fast{
+                  name
+                  type
+                  damage
+                }
+                special{
+                  name
+                  type
+                  damage
+                }
+              }
+              classification
+              types
+              resistant
+              weaknesses
+              fleeRate
+              maxCP
+              maxHP
+              image
+            }
             classification
             types
             resistant
@@ -48,15 +54,12 @@ const getRequestBody = (searchValue: string) => {
             maxCP
             maxHP
             image
-          }
-          classification
-          types
-          resistant
-          weaknesses
-          fleeRate
-          maxCP
-          maxHP
-          image
+          `
+  if (typeof searchValue === 'string' && searchValue !== '') {
+    return {
+      query: `query pokemon($id: String, $name: String){
+        pokemon(id: $id, name: $name){
+          ${query}
         }
       }`,
       variables: { name: searchValue ?? '' },
@@ -65,58 +68,10 @@ const getRequestBody = (searchValue: string) => {
     return {
       query: `query pokemons($first: Int!){
       pokemons(first: $first){
-        id
-        number
-        name
-        attacks{
-          fast{
-            name
-            type
-            damage
-          }
-          special{
-            name
-            type
-            damage
-          }
-        }
-        evolutions{
-          id
-          number
-          name
-          attacks{
-            fast{
-              name
-              type
-              damage
-            }
-            special{
-              name
-              type
-              damage
-            }
-          }
-          classification
-          types
-          resistant
-          weaknesses
-          fleeRate
-          maxCP
-          maxHP
-          image
-        }
-        classification
-        types
-        resistant
-        weaknesses
-        fleeRate
-        maxCP
-        maxHP
-        image
+        ${query}
       }
     }`,
-      // get first 10 pokemons or use `maxPokemonNumber`
-      variables: { first: 50 },
+      variables: { first: maxPokemonNumber },
     }
   }
 }
@@ -131,6 +86,7 @@ const handleSearchPokemon = async (
       data: requestBody,
     })
     const result = response?.data?.data
+    console.log('res', result)
     if (Array.isArray(result?.pokemons)) {
       // return case: multiple pokemon
       return result.pokemons

@@ -1,8 +1,9 @@
 import styled from '@emotion/styled'
-import { Chip, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import { PokemonInterface } from '../../types'
+import PokemonTypes from './PokemonType'
 
 const PokemonNameContainer = styled(Box)`
   display: flex;
@@ -33,10 +34,9 @@ const PokemonName = ({ number, name, types }: PokemonNameProps) => {
         </Typography>
         <Typography variant="h6">{name}</Typography>
       </NameColumn>
-      {/* // TODO: MAKE THIS DYNAMIC COLOR */}
       <TypesColumn>
         {types?.map((type, index) => {
-          return <Chip key={`${index}-${type}`} label={type} />
+          return <PokemonTypes key={`${index}-${type}`} type={type} />
         })}
       </TypesColumn>
     </PokemonNameContainer>
